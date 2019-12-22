@@ -2,7 +2,6 @@ package com.task.doctor.util;
 
 import com.task.doctor.entity.Doctor;
 import com.task.doctor.service.DoctorService;
-import java.io.File;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
