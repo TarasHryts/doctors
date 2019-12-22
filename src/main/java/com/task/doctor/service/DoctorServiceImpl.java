@@ -2,7 +2,7 @@ package com.task.doctor.service;
 
 import com.task.doctor.dao.DoctorDao;
 import com.task.doctor.entity.Doctor;
-import java.util.Optional;
+import java.util.List;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Transactional
     @Override
-    public Optional<Doctor> add(Doctor doctor) {
-        return doctorDao.add(doctor);
+    public void addAll(List<Doctor> doctorList) {
+        doctorDao.addAll(doctorList);
     }
 }
