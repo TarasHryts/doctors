@@ -36,8 +36,6 @@ public class ScheduledTask extends TimerTask {
         FileUtil.fileDownload(zipName, PATH + ZIP_NAME);
         FileUtil.unZipFile(PATH + ZIP_NAME, fileName);
         List<Doctor> doctorList = FileUtil.readDataFromFile(PATH + fileName);
-        new File(PATH + ZIP_NAME, fileName).deleteOnExit();
-        new File(PATH + fileName).deleteOnExit();
         doctorService.addAll(doctorList);
     }
 }
