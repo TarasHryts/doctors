@@ -2,6 +2,7 @@ package com.task.doctor.util;
 
 import com.task.doctor.entity.Doctor;
 import com.task.doctor.service.DoctorService;
+import java.io.File;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -35,8 +36,8 @@ public class ScheduledTask extends TimerTask {
         FileUtil.fileDownload(zipName, PATH + ZIP_NAME);
         FileUtil.unZipFile(PATH + ZIP_NAME, fileName);
         List<Doctor> doctorList = FileUtil.readDataFromFile(PATH + fileName);
-        for (Doctor doctor : doctorList) {
-            doctorService.add(doctor);
-        }
+        new File(PATH + ZIP_NAME, fileName).deleteOnExit();
+        new File(PATH + fileName).deleteOnExit();
+        doctorService.addAll(doctorList);
     }
 }

@@ -4,8 +4,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import org.hibernate.annotations.BatchSize;
 
 @Entity
+@BatchSize(size = 30)
 @Table(name = "doctor")
 public class Doctor {
     @Id

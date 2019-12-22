@@ -2,7 +2,7 @@ package com.task.doctor.dao;
 
 import com.task.doctor.entity.Doctor;
 import com.task.doctor.util.HibernateUtil;
-import java.util.Optional;
+import java.util.List;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -15,16 +15,18 @@ public class DoctorDaoHibernateImpl implements DoctorDao {
     private static Logger logger = Logger.getLogger(DoctorDaoHibernateImpl.class);
 
     @Override
-    public Optional<Doctor> add(Doctor doctor) {
+    public void addAll(List<Doctor> doctorList) {
         Transaction transaction = null;
         Session session = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            session.save(doctor);
-            transaction.commit();
+            for (Doctor doctor : doctorList) {
+                session.persist(doctor);
+            }
+
         } catch (Exception e) {
-            logger.info(String.format("Can't save doctor with id=%s ", doctor.getNpiID()));
+            logger.info(String.format("Can't save doctor"));
             if (transaction != null) {
                 transaction.rollback();
             }
@@ -33,6 +35,5 @@ public class DoctorDaoHibernateImpl implements DoctorDao {
                 session.close();
             }
         }
-        return Optional.ofNullable(doctor);
     }
 }
